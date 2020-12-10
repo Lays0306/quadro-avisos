@@ -2,11 +2,66 @@
 
 <body>
 
-    <div class="alert alert-danger">
-      <h1>
-        <span class="material-icons">campaign</span>
-       Form de Cadastro</h1>
-    </div>
+    <div class="container">
+      <br>
+      
+      <!--Eu não consegui fazer com que a mensagem de sucesso funcionasse então somente quando da erro aparece mensagem-->
+      <% if (typeof msg !== 'undefined') { %>
+
+        <% if (msg.tipo === "sucesso") { %>        
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong><i class="far fa-check-circle"></i>Sucesso</strong> <%= msg.corpo %> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+         
+        <% } %>
+        <% if (msg.tipo === "erro") { %>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong><%= msg.tipo %></strong> <%= msg.corpo %> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+         
+        <% } %>
+
+      <% } %>
+
+      <br>
+
+      <a href="#"><i class="fas fa-arrow-left"></i> Clique para voltar</a> <br><br>
+      <div class="card shadow ">
+        <div class="card-header bg-pink text-white pt-3"> 
+        <h2><i class="fas fa-plus-circle"></i> Novo Aviso</h2>
+        </div>
+        <div class="card-body p-5">
+            <!--Formulári para o usuário inserir os avisos-->
+          <form action="/avisos/novo" method="POST">
+            <div class="form-group">
+              <label for="titulo">Título</label> 
+              <input id="titulo" name="titulo" placeholder="Digite o titulo do aviso (Exemplo: Prova de matemática)" type="text" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="data">Data</label> 
+              <input id="data" name="data" type="date" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="Digite o aviso aqui">Mensagem</label> 
+              <textarea id="mensagem" name="mensagem" cols="40" rows="5" class="form-control"
+              placeholder="Digite o aviso aqui (Exemplo: Não esquecer!!)" required></textarea>
+            </div> 
+            <br>
+            <div class="form-group">
+              <button name="submit" type="submit" class="btn btn-success">Concluir</button>
+              <button name="submit" type="submit" class="btn btn-danger">Limpar</button>
+            </div>
+          </form>
+       </div> <!--Div que fecha o card-body-->
+    </div> <!--Dvi que fecha o card-->
+
+  </div> <!--Div que fecha o container-->
     
     <%- include('./partials/scripts_import') %> 
     
