@@ -38,8 +38,12 @@
                         <td><%= aviso.titulo %></td>
                         <td><%= moment(aviso.data).format("DD/MM/YYYY") %></td>
                         <td>
+                            <!--Botão de excluir-->
                             <button class = "btn btn-secondary" data-bs-toggle="modal" data-bs-target="#excluirModal" onclick="excluir(event,'<%= aviso.ID_avisos %>')">Excluir</button>
-                            <button class = "btn btn-primary">Mudar</button>
+                            
+                            <!--Botão de mudar (Alterar)-->
+                            <a href="avisos/editar/<%= aviso.ID_avisos %>"   class = "btn btn-primary">Mudar</a>
+                            
                         </td>
                       </tr>
                   <% }) %>

@@ -4,6 +4,16 @@
     <!--Menu-->
     <%- include('./partials/navbar') %> 
 
+    <% if (typeof aviso !== 'undefined') { %>
+      <% var titulo = "Mudar aviso" %> 
+      <% var rota = "/avisos/editar/"+aviso.ID_avisos %> 
+    <% } else { %>
+      <% var titulo = "Novo Aviso" %> 
+      <% var rota = "/avisos/novo" %> 
+    <% } %>
+     
+
+
     <div class="container">
       <br>
       
@@ -34,29 +44,39 @@
       <br>
 
       <a href="#"><i class="fas fa-arrow-left"></i> Clique para voltar</a> <br><br>
+
       <div class="card shadow ">
         <div class="card-header bg-pink text-white pt-3"> 
-        <h2><i class="fas fa-plus-circle"></i> Novo Aviso</h2>
+        <h2><i class="fas fa-plus-circle"></i> <%= titulo %>  </h2>
         </div>
         <div class="card-body p-5">
             <!--Formulári para o usuário inserir os avisos-->
-          <form action="/avisos/novo" method="POST">
+          <form action="<%= rota %>" method="POST">
+
+            <% if (typeof aviso !== 'undefined') { %>
+              <div class="form-group">
+                <label for="titulo">ID do aviso (Somente para leitura)</label> 
+                <input id="id" name="id" type="text" class="form-control" required value="<%= aviso.ID_avisos %> " readonly>
+              </div>
+            <% } %>
+
+
             <div class="form-group">
               <label for="titulo">Título</label> 
-              <input id="titulo" name="titulo" placeholder="Digite o titulo do aviso (Exemplo: Prova de matemática)" type="text" class="form-control" required>
+              <input id="titulo" name="titulo" type="text" class="form-control" required value="<%= typeof aviso != 'undefined' ? aviso.titulo : null %>" placeholder="Digite o titulo do aviso (Exemplo: Prova de matemática)"> 
             </div>
             <div class="form-group">
               <label for="data">Data</label> 
-              <input id="data" name="data" type="date" class="form-control" required>
+              <input id="data" name="data" type="date" class="form-control"  required value="<%= typeof aviso != 'undefined' ? moment(aviso.data).format('DD/MM/YYYY') : null %>" >
             </div>
             <div class="form-group">
               <label for="Digite o aviso aqui">Mensagem</label> 
               <textarea id="mensagem" name="mensagem" cols="40" rows="5" class="form-control"
-              placeholder="Digite o aviso aqui (Exemplo: Não esquecer!!)" required></textarea>
+              placeholder="Digite o aviso aqui (Exemplo: Não esquecer!!)" required><%= typeof aviso != 'undefined' ? aviso.mensagem : null %></textarea>
             </div> 
             <br>
             <div class="form-group">
-              <button name="submit" type="submit" class="btn btn-success">Concluir</button>
+              <button name="submit" type="submit" class="btn btn-success"><%= typeof aviso != 'undefined' ? "Mudar" : "Concluir" %></button>
               <button name="submit" type="submit" class="btn btn-danger">Limpar</button>
             </div>
           </form>
