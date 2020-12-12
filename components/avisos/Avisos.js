@@ -50,7 +50,7 @@ function editar(aviso, id){
  */
 //Se tudo der certo
 function selecionarTodos(aviso){
-    return db.select('*').from('avisos')
+    return db.select('*').from('avisos').orderBy('data','asc')
     .then(avisos =>{ return avisos })
 
 //Se der erro

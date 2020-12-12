@@ -5,8 +5,9 @@ const router = express.Router()
 const Avisos = require ('./Avisos')
 
 //Rota da página inicial
-router.get('/',(req,res)=>{
-    res.send("Pag Principal")
+router.get('/', async (req,res)=>{
+    const avisos = await Avisos.selecionarTodos()
+    res.render('index',{avisos})
 })
 
 //Rota que mostra os avisos

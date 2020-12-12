@@ -1,6 +1,7 @@
 //Importar as dependencias
 const express = require('express')
 const bodyParser = require('body-parser')
+const moment = require('moment')
 
 //Importando as rotas do aviso
 const routerAvisos = require('./components/Avisos/AvisosController')
@@ -13,7 +14,8 @@ const app = express()
 app.set('view engine','ejs')
 app.use(express.static('public'))
 
-app.locals.moment = require('moment')
+moment.locale('pt-br')
+app.locals.moment = moment
 
 //Configuração do body-parser
 app.use(bodyParser.urlencoded({extended:false}))
